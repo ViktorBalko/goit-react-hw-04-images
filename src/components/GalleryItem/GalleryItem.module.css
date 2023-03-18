@@ -1,0 +1,19 @@
+.GalleryItem {
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.GalleryItemImage {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  filter: brightness(90%) contrast(100%);
+  transition: 0.8s;
+}
+
+.GalleryItemImage:hover {
+  scale: 1.02;
+  transition: 0.8s;
+  cursor: pointer;
+  filter: brightness(110%) contrast(110%);
+}
