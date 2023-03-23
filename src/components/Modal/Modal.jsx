@@ -5,7 +5,7 @@ import styles from './Modal.module.css';
 
 const modalRoot = document.querySelector('#modal-root');
 
-function Modal({ currentImage, onClose }) {
+const Modal = ({ currentImage, onClose }) => {
   useEffect(() => {
     const handleKeyDown = evt => {
       if (evt.code === 'Escape') {
@@ -32,7 +32,7 @@ function Modal({ currentImage, onClose }) {
     </div>,
     modalRoot
   );
-}
+};
 
 Modal.propTypes = {
   currentImage: PropTypes.string.isRequired,
