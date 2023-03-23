@@ -12,44 +12,48 @@ export function App() {
   const [request, setRequest] = useState('');
   const [response, setResponse] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
   const [totalHits, setTotalHits] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentImage, setCurrentImage] = useState('');
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+    if (request === '') {
+      return;
+    }
+    setLoading(true);
+
     fetchImages(request, currentPage)
       .then(response => {
         if (response.hits.length === 0) {
           throw new Error('No photos found');
         }
-
-        setResponse(prevState => [...prevState, ...response.hits]);
+        setResponse(prevResponse => [...prevResponse, ...response.hits]);
         setTotalHits(response.totalHits);
       })
-      .catch(error => setError(error.message))
+      .catch(err => setError(err.message))
       .finally(() => setLoading(false));
   }, [request, currentPage]);
 
-  const handleOpenModal = image => {
-    setCurrentImage(image);
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setCurrentImage('');
-    setShowModal(false);
+  const handleFormSubmit = query => {
+    setRequest(query);
+    setResponse([]);
+    setCurrentPage(1);
   };
 
   const hanleLoadMore = () => {
     setCurrentPage(prevState => prevState + 1);
   };
 
-  const handleFormSubmit = request => {
-    setRequest(request);
-    setResponse([]);
-    setCurrentPage(1);
+  const handleOpenModal = img => {
+    setCurrentImage(img);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setCurrentImage('');
+    setShowModal(false);
   };
 
   const totalPage = response.length / totalHits;

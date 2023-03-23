@@ -1,48 +1,46 @@
-import { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import styles from './SearchBar.module.css';
 
-export default class SearchBar extends Component {
-  state = {
-    request: '',
+const SearchBar = ({ onSubmit }) => {
+  const [request, setRequest] = useState('');
+
+  const handleRequestChange = evt => {
+    setRequest(evt.currentTarget.value.toLowerCase());
   };
 
-  handleRequestChange = evt => {
-    this.setState({ request: evt.currentTarget.value.toLowerCase() });
-  };
-
-  handleSubmit = evt => {
+  const handleSubmit = evt => {
     evt.preventDefault();
 
-    if (this.state.request.trim() === '') {
+    if (request.trim() === '') {
       return toast.error('Enter request');
     }
 
-    this.props.onSubmit(this.state.request);
-    this.setState({ request: '' });
+    onSubmit(request);
+    setRequest('');
   };
 
-  render() {
-    return (
-      <header className={styles.SearchBar}>
-        <form className={styles.SearchBarForm} onSubmit={this.handleSubmit}>
-          <button type="submit" className={styles.SearchBarButton}>
-            Search
-          </button>
-          <input
-            className={styles.SearchBarInput}
-            type="text"
-            name="request"
-            value={this.state.request}
-            onChange={this.handleRequestChange}
-          />
-        </form>
-      </header>
-    );
-  }
-}
+  return (
+    <header className={styles.SearchBar}>
+      <form className={styles.SearchBarForm} onSubmit={handleSubmit}>
+        <button type="submit" className={styles.SearchBarButton}>
+          search
+        </button>
+        <input
+          className={styles.SearchBarInput}
+          type="text"
+          name="request"
+          value={request}
+          onChange={handleRequestChange}
+        />
+      </form>
+    </header>
+  );
+};
 
 SearchBar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
+
+export default SearchBar;

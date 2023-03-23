@@ -7,14 +7,14 @@
   border-radius: 11px;
   border: none;
   margin: 50px auto 50px;
-  color: #d1d1d1;
   transition: 350ms;
-  background-color: #0056a7f2;
+  color: #d1d1d1;
+  background: #002d67d9;
 }
 
 .MoreButton:hover {
   scale: 1.1;
-  transition: 250ms;
-  color: #ffffffe3;
-  background-color: #0067c6e3;
+  transition: 350ms;
+  color: #ffffff;
+  background: #11478dd9;
 }

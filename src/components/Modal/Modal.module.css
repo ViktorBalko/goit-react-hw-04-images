@@ -4,18 +4,17 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 11, 21, 0.722);
+  background-color: #000000b8;
   z-index: 10;
 }
 
 .ModalContent {
   position: absolute;
-
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-height: 85%;
-  max-width: 85%;
+  max-height: 95%;
+  max-width: 95%;
   padding: 12px;
   border-radius: 30px;
 }
